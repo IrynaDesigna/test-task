@@ -33,23 +33,23 @@ test(`Merge of 2 different array suppose to override existing properties and add
     });
 });
 
+var object = { 'a': 1, 'b': '2', 'c': 3 };
+
 // omit testing
 test('omit function exists', () => {
     expect(funcObject.omit).toBeDefined();
 });
 
-const omitObject = { 'a': 1, 'b': '2', 'c': 3 };
-
 test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
-    expect(funcObject.omit(omitObject, ['a', 'c'])).toEqual({'b': '2'});
+    expect(funcObject.omit(object, ['a', 'c'])).toEqual({'b': '2'});
 });
 
 test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
-    expect(funcObject.omit(omitObject, 'c')).toEqual({'a': 1, 'b': '2'});
+    expect(funcObject.omit(object, 'c')).toEqual({'a': 1, 'b': '2'});
 });
 
 test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
-    expect(funcObject.omit(omitObject, 'blah')).toEqual(omitObject);
+    expect(funcObject.omit(object, 'blah')).toEqual(object);
 });
 
 // pick testing
@@ -57,18 +57,29 @@ test('pick function exists', () => {
     expect(funcObject.pick).toBeDefined();
 });
 
-const pickObject = { 'a': 1, 'b': '2', 'c': 3 };
-
 test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'a': 1, 'c': 3}`, () => {  
-    expect(funcObject.pick(pickObject, ['a', 'c'])).toEqual({'a': 1, 'c': 3});
+    expect(funcObject.pick(object, ['a', 'c'])).toEqual({'a': 1, 'c': 3});
 });
 
 test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'c': 3}`, () => {  
-    expect(funcObject.pick(pickObject, 'c')).toEqual({'c': 3});
+    expect(funcObject.pick(object, 'c')).toEqual({'c': 3});
 });
 
 test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
-    expect(funcObject.pick(pickObject, 'blah')).toEqual({});
+    expect(funcObject.pick(object, 'blah')).toEqual({});
+});
+
+// pickBy testing
+test('pickBy function exists', () => {
+    expect(funcObject.pickBy).toBeDefined();
+});
+
+function isNumber(value) {
+    return Number.isInteger(value);
+}
+
+test(`result of picking by function isNumber the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'a': 1, 'c': 3}`, () => {  
+    expect(funcObject.pickBy(object, isNumber)).toEqual({'a': 1, 'c': 3});
 });
 
 // toPairs testing
