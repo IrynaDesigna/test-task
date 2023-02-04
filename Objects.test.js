@@ -51,3 +51,22 @@ test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`
 test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
     expect(funcObject.omit(omitObject, 'blah')).toEqual(omitObject);
 });
+
+// pick testing
+test('pick function exists', () => {
+    expect(funcObject.pick).toBeDefined();
+});
+
+const pickObject = { 'a': 1, 'b': '2', 'c': 3 };
+
+test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'a': 1, 'c': 3}`, () => {  
+    expect(funcObject.pick(pickObject, ['a', 'c'])).toEqual({'a': 1, 'c': 3});
+});
+
+test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'c': 3}`, () => {  
+    expect(funcObject.pick(pickObject, 'c')).toEqual({'c': 3});
+});
+
+test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
+    expect(funcObject.pick(pickObject, 'blah')).toEqual({});
+});
