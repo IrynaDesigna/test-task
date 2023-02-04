@@ -65,10 +65,38 @@ const take = (arr, n=1) => {
   return result;
 }
 
+// Includes - check if value is in collection
+const includes = (collection, value, fromIndex = 0) => {
+  if (typeof collection === 'string') {
+    return collection.indexOf(value, fromIndex) !== -1;
+  }
+
+  if (Array.isArray(collection)) {
+    for (let i = fromIndex; i < collection.length; i++) {
+      if (collection[i] === value) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  if (typeof collection === 'object') {
+    const keys = Object.keys(collection);
+    for (let i = 0; i < keys.length; i++) {
+      if (collection[keys[i]] === value) {
+        return true;
+      }
+    }
+    return false;
+  }
+};
+
+
 // object Array with functions
 export const objectArr = {
   chunk: chunk,
   compact: compact,
   drop: drop,
-  take: take
+  take: take,
+  includes: includes
 }
