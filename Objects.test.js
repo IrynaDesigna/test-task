@@ -33,7 +33,8 @@ test(`Merge of 2 different array suppose to override existing properties and add
     });
 });
 
-var object = { 'a': 1, 'b': '2', 'c': 3 };
+// const object created to check functions: omit, pick, omitBy and pickBy
+const object = { 'a': 1, 'b': '2', 'c': 3 };
 
 // omit testing
 test('omit function exists', () => {
@@ -69,17 +70,27 @@ test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`,
     expect(funcObject.pick(object, 'blah')).toEqual({});
 });
 
+// function isNumber for testing pickBy and omitBy functions
+function isNumber(value) {
+    return Number.isInteger(value);
+}
+
 // pickBy testing
 test('pickBy function exists', () => {
     expect(funcObject.pickBy).toBeDefined();
 });
 
-function isNumber(value) {
-    return Number.isInteger(value);
-}
-
 test(`result of picking by function isNumber the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'a': 1, 'c': 3}`, () => {  
     expect(funcObject.pickBy(object, isNumber)).toEqual({'a': 1, 'c': 3});
+});
+
+// omitBy testing
+test('omitBy function exists', () => {
+    expect(funcObject.omitBy).toBeDefined();
+});
+
+test(`result of picking by function isNumber the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': '2'}`, () => {  
+    expect(funcObject.omitBy(object, isNumber)).toEqual({'b': '2'});
 });
 
 // toPairs testing
