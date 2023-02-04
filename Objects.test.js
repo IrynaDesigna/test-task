@@ -70,3 +70,19 @@ test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'c': 3}`,
 test(`the result of picking the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
     expect(funcObject.pick(pickObject, 'blah')).toEqual({});
 });
+
+// toPairs testing
+test('toPairs function exists', () => {
+    expect(funcObject.toPairs).toBeDefined();
+});
+
+function Foo() {
+    this.a = 1;
+    this.b = 2;
+  }
+   
+  Foo.prototype.c = 3;
+
+test(`the result of new Foo(){this.a = 1;this.b = 2;} object should be an array with [keys: properties] of Foo`, () => {  
+    expect(funcObject.toPairs(new Foo)).toEqual([{'a': 1},{'b': 2}]);
+});
