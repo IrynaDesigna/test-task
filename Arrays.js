@@ -57,7 +57,6 @@ const drop = (arr, n=1) => {
 //  Take - creates a slice of array with n elements taken from the beginning
 const take = (arr, n=1) => {
   let result = [];
-  if (n === 1) return result[0] = arr[0];
   if (n === 0) return result;
   if (n >= arr.length) return arr;
   for (let i = 0; i < n; i++) {
