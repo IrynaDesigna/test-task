@@ -42,12 +42,13 @@ const compact = (arr) => {
 // Drop creates a slice of array with n elements dropped from the beginning
 const drop = (arr, n=1) => {
   let result = [];
+  let resultLength = arr.length - n;
   if (arr.length <= n) return result;
   if (n === 0) return arr;
   let i = 0;
-  while (n !== 0 ) {
-    result[i] = arr[arr.length - n];
-    n--;
+  while (resultLength !== 0 ) {
+    result[i] = arr[arr.length - resultLength];
+    resultLength--;
     i++;
   }
   return result;
