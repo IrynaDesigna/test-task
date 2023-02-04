@@ -45,9 +45,35 @@ const omit = (obj, strings) => {
   
     return result;
   };
+
+// Pick - creates an object composed of the picked object properties.
+const pick = (obj, strings) => {
+    let result = {};
+    const keys = Object.keys(obj);
   
+    if (!Array.isArray(strings)) {
+      strings = [strings];
+    }
+  
+    for (let i = 0; i < keys.length; i++) {
+      let omitKey = true;
+      for (let j = 0; j < strings.length; j++) {
+        if (keys[i] === strings[j]) {
+          omitKey = false;
+          break;
+        }
+      }
+      if (!omitKey) {
+        result[keys[i]] = obj[keys[i]];
+      }
+    }
+  
+    return result;
+};
+
 // funcObject with functions
 export const funcObject = {
     merge: merge,
-    omit: omit
+    omit: omit,
+    pick: pick
 }
