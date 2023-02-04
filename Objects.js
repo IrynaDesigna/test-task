@@ -86,6 +86,21 @@ const pickBy = (obj,predicate) => {
     return result
 }
 
+// omitBy - creates an object composed of the own and inherited enumerable string keyed properties of object that predicate doesn't return truthy for. 
+//          The predicate is invoked with two arguments: (value, key).
+//          Arguments: object (Object): The source object.
+//          [predicate=_.identity] (Function): The function invoked per property.
+//          Returns: (Object): the new object.
+const omitBy = (obj,predicate) => {
+    let result = {};
+    for (let key in obj) {
+        if (!predicate(obj[key])) {
+            result[key] = obj[key]
+        }
+    }
+    return result
+}
+
 // toPairs - Creates an array of own enumerable string keyed-value pairs for object which can be consumed by _.fromPairs.
 //           If object is a map or set, its entries are returned.
 //           Arguments: (Object): The object to query.
@@ -105,5 +120,6 @@ export const funcObject = {
     omit: omit,
     pick: pick,
     toPairs: toPairs,
-    pickBy: pickBy
+    pickBy: pickBy,
+    omitBy: omitBy
 }
