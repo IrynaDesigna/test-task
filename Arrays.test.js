@@ -43,3 +43,24 @@ test('drop result of ([1,2,3,4,5,6,7,8,9,10],0) sholud be []', () => {
 test('drop result of ([1,2,3,4,5,6,7,8,9,10]) sholud be []', () => {
     expect(objectArr.drop([1,2,3,4,5,6,7,8,9,10])).toEqual([2,3,4,5,6,7,8,9,10]);
 });
+
+// take testing
+test('take function exists', () => {
+    expect(objectArr.take).toBeDefined();
+});
+
+test('take result of ([1,2,3,4,5,6,7,8,9,10],5) sholud be [1,2,3,4,5]', () => {
+    expect(objectArr.take([1,2,3,4,5,6,7,8,9,10],5)).toEqual([1,2,3,4,5]);
+});
+
+test('take result of ([1,2,3,4,5,6,7,8,9,10],15) sholud be [1,2,3,4,5,6,7,8,9,10]', () => {
+    expect(objectArr.take([1,2,3,4,5,6,7,8,9,10],15)).toEqual([1,2,3,4,5,6,7,8,9,10]);
+});
+
+test('take result of ([1,2,3,4,5,6,7,8,9,10],0) sholud be []', () => {
+    expect(objectArr.take([1,2,3,4,5,6,7,8,9,10],0)).toEqual([]);
+});
+
+test('take result of ([1,2,3,4,5,6,7,8,9,10]) sholud be [1]', () => {
+    expect(objectArr.take([1,2,3,4,5,6,7,8,9,10])).toEqual([1]);
+});
