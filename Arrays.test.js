@@ -33,13 +33,13 @@ test('drop result of ([1,2,3,4,5,6,7,8,9,10],5) sholud be [6,7,8,9,10]', () => {
 });
 
 test('drop result of ([1,2,3,4,5,6,7,8,9,10],15) sholud be []', () => {
-    expect(objectArr.drop([1,2,3,4,5,6,7,8,9,10],5)).toEqual([]);
+    expect(objectArr.drop([1,2,3,4,5,6,7,8,9,10],15)).toEqual([]);
 });
 
 test('drop result of ([1,2,3,4,5,6,7,8,9,10],0) sholud be []', () => {
-    expect(objectArr.drop([1,2,3,4,5,6,7,8,9,10],5)).toEqual([]);
+    expect(objectArr.drop([1,2,3,4,5,6,7,8,9,10],0)).toEqual([1,2,3,4,5,6,7,8,9,10]);
 });
 
 test('drop result of ([1,2,3,4,5,6,7,8,9,10]) sholud be []', () => {
-    expect(objectArr.drop([1,2,3,4,5,6,7,8,9,10],5)).toEqual([2,3,4,5,6,7,8,9,10]);
+    expect(objectArr.drop([1,2,3,4,5,6,7,8,9,10])).toEqual([2,3,4,5,6,7,8,9,10]);
 });
