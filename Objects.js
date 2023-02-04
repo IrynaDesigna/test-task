@@ -71,9 +71,23 @@ const pick = (obj, strings) => {
     return result;
 };
 
+// toPairs - Creates an array of own enumerable string keyed-value pairs for object which can be consumed by _.fromPairs.
+//           If object is a map or set, its entries are returned.
+//           Arguments: (Object): The object to query.
+//           Returns: (Array): the key-value pairs.
+const toPairs = (obj) => {
+    let result = [];
+    const keys = Object.keys(obj);
+    for (let i = 0; i < keys.length; i++) {
+        result[i] = {[keys[i]]: obj[keys[i]]};
+    }
+    return result;
+}
+
 // funcObject with functions
 export const funcObject = {
     merge: merge,
     omit: omit,
-    pick: pick
+    pick: pick,
+    toPairs: toPairs
 }
