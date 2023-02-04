@@ -32,3 +32,22 @@ test(`Merge of 2 different array suppose to override existing properties and add
         'recipe': 'mix everything 🤪'
     });
 });
+
+// omit testing
+test('omit function exists', () => {
+    expect(funcObject.omit).toBeDefined();
+});
+
+const omitObject = { 'a': 1, 'b': '2', 'c': 3 };
+
+test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
+    expect(funcObject.omit(omitObject, ['a', 'c'])).toEqual({'b': '2'});
+});
+
+test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
+    expect(funcObject.omit(omitObject, 'c')).toEqual({'a': 1, 'b': '2'});
+});
+
+test(`the result of omitting the { 'a': 1, 'b': '2', 'c': 3 } shoud be {'b': 2}`, () => {  
+    expect(funcObject.omit(omitObject, 'blah')).toEqual(omitObject);
+});
