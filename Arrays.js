@@ -1,4 +1,5 @@
-// Chunck - creates an array of elements split into groups the length of size. If array can't be split evenly, the final chunk will be the remaining elements.
+// Chunck - creates an array of elements split into groups the length of size. 
+//          If array can't be split evenly, the final chunk will be the remaining elements.
 const chunk = (arr, len) => {
   let result = [];
   let chunk = [];
@@ -17,7 +18,8 @@ const chunk = (arr, len) => {
   return result;
 }
 
-// Compact - creates an array with all falsey values removed. The values false, null, 0, "", undefined, and NaN are falsey.
+// Compact - creates an array with all falsey values removed. 
+//           The values false, null, 0, "", undefined, and NaN are falsey.
 const compact = (arr) => {
   const falsey = [false, null, 0, '', undefined, NaN];
   let result = [];
@@ -65,7 +67,9 @@ const take = (arr, n=1) => {
   return result;
 }
 
-// Includes - check if value is in collection
+// Includes - Checks if value is in collection. 
+//            If collection is a string, it's checked for a substring of value, otherwise SameValueZero is used for equality comparisons. 
+//            If fromIndex is negative, it's used as the offset from the end of collection.
 const includes = (collection, value, fromIndex = 0) => {
   if (typeof collection === 'string') {
     return collection.indexOf(value, fromIndex) !== -1;
@@ -91,6 +95,51 @@ const includes = (collection, value, fromIndex = 0) => {
   }
 };
 
+// Find - Iterates over elements of collection, returning the first element predicate returns truthy for. 
+//        The predicate is invoked with three arguments: (collection, value, index|key).
+function find(array, value, startFrom = 0) {
+  if (typeof value === 'function') {
+    for (var i = startFrom; i < array.length; i++) {
+      if (value(array[i])) {
+        return array[i];
+      }
+    }
+    return undefined;
+  } else if (typeof value === 'object' && !Array.isArray(value)) {
+    for (let i = startFrom; i < array.length; i++) {
+      let match = true;
+      for (const key in value) {
+        if (array[i][key] !== value[key]) {
+          match = false;
+          break;
+        }
+      }
+      if (match) {
+        return array[i];
+      }
+    }
+  } else if (Array.isArray(value)) {
+    for (let i = startFrom; i < array.length; i++) {
+      if (array[i][value[0]] === value[1]) {
+        return array[i];
+      }
+    }
+  } else if (typeof array[0] === 'object') {
+    for (let i = startFrom; i < array.length; i++) {
+      if (array[i][value]) {
+        return array[i];
+      }
+    }
+  } else {
+    for (let i = startFrom; i < array.length; i++) {
+      if (array[i] === value) {
+        return array[i];
+      }
+    }
+  }
+  return undefined;
+}
+
 
 // object Array with functions
 export const objectArr = {
@@ -98,5 +147,6 @@ export const objectArr = {
   compact: compact,
   drop: drop,
   take: take,
-  includes: includes
+  includes: includes,
+  find: find
 }
