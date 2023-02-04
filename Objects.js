@@ -78,12 +78,12 @@ const pick = (obj, strings) => {
 //          Returns: (Object): the new object.
 const pickBy = (obj,predicate) => {
     let result = {};
-    for (key in obj) {
+    for (let key in obj) {
         if (predicate(obj[key])) {
             result[key] = obj[key]
         }
     }
-    return result;
+    return result
 }
 
 // toPairs - Creates an array of own enumerable string keyed-value pairs for object which can be consumed by _.fromPairs.
