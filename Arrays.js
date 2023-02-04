@@ -39,7 +39,23 @@ const compact = (arr) => {
   return result;
 }
 
+// Drop creates a slice of array with n elements dropped from the beginning
+const drop = (arr, n=1) => {
+  let result = [];
+  if (arr.length <= n) return result;
+  if (n === 0) return arr;
+  let i = 0;
+  while (n !== 0 ) {
+    result[i] = arr[arr.length - n];
+    n--;
+    i++;
+  }
+  return result;
+}
+
+// object Array with functions
 export const objectArr = {
   chunk: chunk,
-  compact: compact
+  compact: compact,
+  drop: drop
 }
