@@ -139,3 +139,19 @@ test(`Filter by 2 of [1,2,2,4,5,6,7,8,9] should be [2,2]`, () => {
     expect(objectArr.filter([1,2,2,4,5,6,7,8,9], 2)).toEqual([2,2]);
 });
 
+// map testing
+test('map function exists', () => {
+    expect(objectArr.map).toBeDefined();
+});
+
+test(`Map by function(n) {return n * n} of [4, 8] should be [16,64]`, () => {
+    expect(objectArr.map([4, 8], function(n) {return n * n})).toEqual([16,64]);
+});
+
+test(`Map by function(n) {return n * n} of { 'a': 4, 'b': 8 } should be [16,64]`, () => {
+    expect(objectArr.map({ 'a': 4, 'b': 8 }, function(n) {return n * n})).toEqual([16,64]);
+});
+
+test(`Map by 'user' of Users should be [16,64]`, () => {
+    expect(objectArr.map(users, 'user')).toEqual(["barney","fred","pebbles"]);
+});
