@@ -152,11 +152,15 @@ const filter = (collection, predicate) => {
       result[result.length] = collection[i];
     };
     if (typeof predicate === 'object' && typeof collection[i] === 'object') {
+      let match = true;
       for (let key in predicate) {
-        if (collection[i][key] === predicate[key]) {
-          result[result.length] = collection[i];
+        if (collection[i][key] !== predicate[key]) {
+          match = false;
           break;
         }
+      }
+      if (match) {
+        result[result.length] = collection[i];
       }
     };
     if (Array.isArray(predicate) && typeof collection[i] === 'object') {
