@@ -220,6 +220,52 @@ const zip = (...arrays) => {
   return result;
 }
 
+//dropWhile - Creates a slice of array excluding elements dropped from the beginning.
+//            Elements are dropped until predicate returns falsey.
+//            The predicate is invoked with three arguments: (value, index, array). 
+//            Arguments: array (Array): The array to query.
+//                       [predicate=_.identity] (Function): The function invoked per iteration.
+//            Returns: (Array): Returns the slice of array.
+const dropWhile = (arr, predicate) => {
+  let result = [];
+  let index = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(predicate) && typeof arr[i] === 'object') {
+      if (arr[i][predicate[0]] !== predicate[1]) {
+        index = i;    
+        break;
+      };
+    };
+    if ( typeof predicate === 'function' && predicate(arr[i]) !== true) {
+      index = i;
+      break
+    };
+    if (typeof predicate === 'object' && !Array.isArray(predicate) && typeof arr[i] === 'object') {
+      let match = false;
+      for (let key in predicate) {
+        if (arr[i][key] !== predicate[key]) {
+          match = true;
+          break;
+        };
+      };
+      if (match) {
+        index = i;
+        break;
+      };
+    };
+    if (typeof predicate !== 'object' && !Array.isArray(predicate)) {
+      if (arr[i] === predicate) {
+        index = i;
+        break;
+      };
+    };
+  };
+  for (let i = index; i < arr.length; i++) {
+    result[result.length] = arr[i]; 
+  };
+  return result;
+};
+
 // object Array with functions
 export const objectArr = {
   chunk: chunk,
@@ -230,5 +276,6 @@ export const objectArr = {
   find: find,
   filter: filter,
   map: map,
-  zip: zip
+  zip: zip,
+  dropWhile: dropWhile
 }
