@@ -211,7 +211,7 @@ const zip = (...arrays) => {
   let result = [];
   let length = arrays[0].length;
   for (let i = 0; i < length; i++) {
-    resultItem = [];
+    let resultItem = [];
     for (let j = 0; j < arrays.length; j++) {
       resultItem[resultItem.length] = arrays[j][i];
     }
