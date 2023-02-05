@@ -178,6 +178,31 @@ const filter = (collection, predicate) => {
   return result;
 };
 
+// Map - Creates an array of values by running each element in collection thru iteratee. 
+//       The iteratee is invoked with three arguments: (value, index|key, collection).
+//       Arguments: collection (Array|Object): The collection to iterate over.
+//                  [iteratee=_.identity] (Function): The function invoked per iteration.
+//       Returns: (Array): Returns the new mapped array.
+const map = (collection, predicate) => {
+  let result = [];
+  if (typeof collection === "object" && !Array.isArray(collection)) {
+    for (let key in collection) {
+      if ( typeof predicate === 'function') {
+        result[result.length] = predicate(collection[key]);      
+      }; 
+    }   
+  }
+  for (let i = 0; i < collection.length; i++) {
+    if ( typeof predicate === 'function') {
+      result[result.length] = predicate(collection[i]);      
+    };
+    if (typeof predicate === 'string' && typeof collection[i] === 'object') {
+        result[result.length] = collection[i][predicate];
+    }
+  }
+  return result;
+};
+
 // object Array with functions
 export const objectArr = {
   chunk: chunk,
@@ -186,5 +211,6 @@ export const objectArr = {
   take: take,
   includes: includes,
   find: find,
-  filter: filter
+  filter: filter,
+  map: map
 }
