@@ -155,3 +155,12 @@ test(`Map by function(n) {return n * n} of { 'a': 4, 'b': 8 } should be [16,64]`
 test(`Map by 'user' of Users should be [16,64]`, () => {
     expect(objectArr.map(users, 'user')).toEqual(["barney","fred","pebbles"]);
 });
+
+// zip testing
+test('zip function exists', () => {
+    expect(objectArr.zip).toBeDefined();
+});
+
+test(`zipping of ['a', 'b'], [1, 2], [true, false] should be equal [['a', 1, true], ['b', 2, false]]`, () => {
+    expect(objectArr.zip(['a', 'b'], [1, 2], [true, false])).toEqual([['a', 1, true], ['b', 2, false]]);
+});
