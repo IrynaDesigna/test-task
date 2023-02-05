@@ -1,5 +1,11 @@
 import {objectArr} from './Arrays';
 
+const users = [
+    { 'user': 'barney',  'age': 36, 'active': true },
+    { 'user': 'fred',    'age': 40, 'active': false },
+    { 'user': 'pebbles', 'age': 1,  'active': true }
+];
+
 // chunk testing
 test('chunk function exists', () => {
     expect(objectArr.chunk).toBeDefined();
@@ -79,12 +85,6 @@ test('find function exists', () => {
     expect(objectArr.find).toBeDefined();
 });
 
-const users = [
-    { 'user': 'barney',  'age': 36, 'active': true },
-    { 'user': 'fred',    'age': 40, 'active': false },
-    { 'user': 'pebbles', 'age': 1,  'active': true }
-];
-
 test('find(users, function(o) { return o.age < 40; }) => object for "barney"', () => {
     expect(objectArr.find(users, function(o) { return o.age < 40; })).toEqual({ 'user': 'barney',  'age': 36, 'active': true });
 });
@@ -108,3 +108,34 @@ test("find(['a','b',3,7,4,5,'6','b',8,'h',10],'b',5) => 'b'", () => {
 test("find(['a','b',3,7,4,5,'6','b',8,'h',10],'b',5) => undefined", () => {
     expect(objectArr.find(['a','b',3,7,4,5,'6','b',8,'h',10],'a',5)).toBeUndefined(undefined);
 });
+
+
+// filter testing
+test('fiter function exists', () => {
+    expect(objectArr.filter).toBeDefined();
+});
+
+test(`Filter by function(o) { return !o.active; } of Users should be [{ 'user': 'fred',    'age': 40, 'active': false }]`, () => {
+    expect(objectArr.filter(users, function(o) { return !o.active; })).toEqual([{ 'user': 'fred',    'age': 40, 'active': false }]);
+});
+
+test(`Filter by { 'age': 36, 'active': true } of Users should be [{ 'user': 'barney',  'age': 36, 'active': true }]`, () => {
+    expect(objectArr.filter(users, { 'age': 36, 'active': true })).toEqual([{ 'user': 'barney',  'age': 36, 'active': true }]);
+});
+
+test(`Filter by ['active', false] of Users should be [{ 'user': 'fred',    'age': 40, 'active': false }]`, () => {
+    expect(objectArr.filter(users, ['active', false])).toEqual([{ 'user': 'fred',    'age': 40, 'active': false }]);
+});
+
+test(`Filter by 'active' of Users should be [{ 'user': 'barney',  'age': 36, 'active': true },{ 'user': 'pebbles', 'age': 1,  'active': true }]`, () => {
+    expect(objectArr.filter(users, 'active')).toEqual([{ 'user': 'barney',  'age': 36, 'active': true },{ 'user': 'pebbles', 'age': 1,  'active': true }]);
+});
+
+test(`Filter by function(el) {return el > 4} of [1,2,2,4,5,6,7,8,9] should be [5,6,7,8,9]`, () => {
+    expect(objectArr.filter([1,2,2,4,5,6,7,8,9], function(el) {return el > 4})).toEqual([5,6,7,8,9]);
+});
+
+test(`Filter by 2 of [1,2,2,4,5,6,7,8,9] should be [2,2]`, () => {
+    expect(objectArr.filter([1,2,2,4,5,6,7,8,9], 2)).toEqual([2,2]);
+});
+
