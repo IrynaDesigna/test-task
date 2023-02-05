@@ -203,6 +203,23 @@ const map = (collection, predicate) => {
   return result;
 };
 
+// ZIP - Creates an array of grouped elements, the first of which contains the first elements of the given arrays, 
+//       the second of which contains the second elements of the given arrays, and so on.
+//       Arguments: [arrays] (...Array): The arrays to process.
+//       Returns: (Array): Returns the new array of grouped elements.
+const zip = (...arrays) => {
+  let result = [];
+  let length = arrays[0].length;
+  for (let i = 0; i < length; i++) {
+    resultItem = [];
+    for (let j = 0; j < arrays.length; j++) {
+      resultItem[resultItem.length] = arrays[j][i];
+    }
+    result[result.length] = resultItem;
+  }
+  return result;
+}
+
 // object Array with functions
 export const objectArr = {
   chunk: chunk,
@@ -212,5 +229,6 @@ export const objectArr = {
   includes: includes,
   find: find,
   filter: filter,
-  map: map
+  map: map,
+  zip: zip
 }
