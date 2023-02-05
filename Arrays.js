@@ -148,12 +148,31 @@ function find(array, value, startFrom = 0) {
 const filter = (collection, predicate) => {
   let result = [];
   for (let i = 0; i < collection.length; i++) {
-    If (collection[i] === predicate || predicate(collection[i]) === true) {
+    if ( typeof predicate === 'function' && predicate(collection[i]) === true) {
+      result[result.length] = collection[i];
+    };
+    if (typeof predicate === 'object' && typeof collection[i] === 'object') {
+      for (let key in predicate) {
+        if (collection[i][key] === predicate[key]) {
+          result[result.length] = collection[i];
+          break;
+        }
+      }
+    };
+    if (Array.isArray(predicate) && typeof collection[i] === 'object') {
+      if(collection[i][predicate[0]] === predicate[1]) {
+        result[result.length] = collection[i];
+      }
+    };
+    if (typeof predicate === 'string' && typeof collection[i] === 'object') {
+        if (collection[i][predicate] === true) result[result.length] = collection[i];
+    }
+    if (collection[i] === predicate) {
       result[result.length] = collection[i];
     }
   }
   return result;
-}
+};
 
 // object Array with functions
 export const objectArr = {
