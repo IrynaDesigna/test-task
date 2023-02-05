@@ -8,7 +8,7 @@
     "testwatch": "jest --watchAll"
   },
   "keywords": [],
-  "author": "",
+  "author": "Iryna Designa",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.4.1",
