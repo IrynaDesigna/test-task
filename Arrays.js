@@ -140,6 +140,20 @@ function find(array, value, startFrom = 0) {
   return undefined;
 }
 
+// Filter - Iterates over elements of collection, returning an array of all elements predicate returns truthy for.
+//          The predicate is invoked with three arguments: (value, index|key, collection).
+//          Arguments: collection (Array|Object): The collection to iterate over.
+//                     [predicate=_.identity] (Function): The function invoked per iteration.
+//          Returns: (Array): Returns the new filtered array.
+const filter = (collection, predicate) => {
+  let result = [];
+  for (let i = 0; i < collection.length; i++) {
+    If (collection[i] === predicate || predicate(collection[i]) === true) {
+      result[result.length] = collection[i];
+    }
+  }
+  return result;
+}
 
 // object Array with functions
 export const objectArr = {
@@ -148,5 +162,6 @@ export const objectArr = {
   drop: drop,
   take: take,
   includes: includes,
-  find: find
+  find: find,
+  filter: filter
 }
