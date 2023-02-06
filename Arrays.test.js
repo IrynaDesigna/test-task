@@ -164,3 +164,59 @@ test('zip function exists', () => {
 test(`zipping of ['a', 'b'], [1, 2], [true, false] should be equal [['a', 1, true], ['b', 2, false]]`, () => {
     expect(objectArr.zip(['a', 'b'], [1, 2], [true, false])).toEqual([['a', 1, true], ['b', 2, false]]);
 });
+
+// dropWhile testing
+test('dropWhile function exists', () => {
+    expect(objectArr.dropWhile).toBeDefined();
+});
+
+test(`dropWhile of Users by function(o) { return !o.active; } shuld be `, () => {
+    expect(objectArr.dropWhile(users, function(o) { return o.active; })).toEqual([
+        { 'user': 'fred',    'age': 40, 'active': false },
+        { 'user': 'pebbles', 'age': 1,  'active': true }
+    ]);
+});
+
+test(`dropWhile of Users by function(o) { return !o.active; } shuld be [
+        { 'user': 'fred',    'age': 40, 'active': false },
+        { 'user': 'pebbles', 'age': 1,  'active': true }
+    ]`, () => {
+    expect(objectArr.dropWhile(users, { 'user': 'barney', 'active': true })).toEqual([
+        { 'user': 'fred',    'age': 40, 'active': false },
+        { 'user': 'pebbles', 'age': 1,  'active': true }
+    ]);
+});
+
+test(`dropWhile of Users by { 'user': 'barney', 'active': true } shuld be [
+    { 'user': 'fred',    'age': 40, 'active': false },
+    { 'user': 'pebbles', 'age': 1,  'active': true }
+]`, () => {
+    expect(objectArr.dropWhile(users, { 'user': 'barney', 'active': true })).toEqual([
+        { 'user': 'fred',    'age': 40, 'active': false },
+        { 'user': 'pebbles', 'age': 1,  'active': true }
+    ]);
+});
+
+test(`dropWhile of Users by ['active', true] shuld be [
+    { 'user': 'fred',    'age': 40, 'active': false },
+    { 'user': 'pebbles', 'age': 1,  'active': true }
+]`, () => {
+    expect(objectArr.dropWhile(users, ['active', true])).toEqual([
+        { 'user': 'fred',    'age': 40, 'active': false },
+        { 'user': 'pebbles', 'age': 1,  'active': true }
+    ]);
+});
+
+test(`dropWhile of Users by 'active' shuld be [
+    { 'user': 'fred',    'age': 40, 'active': false },
+    { 'user': 'pebbles', 'age': 1,  'active': true }
+]`, () => {
+    expect(objectArr.dropWhile(users, 'active')).toEqual([
+        { 'user': 'fred',    'age': 40, 'active': false },
+        { 'user': 'pebbles', 'age': 1,  'active': true }
+    ]);
+});
+
+test(`dropWhile of 1,2,3,4,5,6,78,5,3] by 5 shuld be [5,6,78,5,3]`, () => {
+    expect(objectArr.dropWhile([1,2,3,4,5,6,78,5,3],5)).toEqual([5,6,78,5,3]);
+});
