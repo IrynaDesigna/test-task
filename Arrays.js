@@ -253,6 +253,12 @@ const dropWhile = (arr, predicate) => {
         break;
       };
     };
+    if (typeof predicate === 'string' && !Array.isArray(predicate)) {
+      if (arr[i][predicate] !== true) {
+        index = i;
+        break;
+      };
+    };
     if (typeof predicate !== 'object' && !Array.isArray(predicate)) {
       if (arr[i] === predicate) {
         index = i;
