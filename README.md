@@ -2,11 +2,11 @@
 
 1. Task: https://github.com/rolling-scopes-school/js-fe-course-en/blob/main/tasks/unit-tests/unit-tests.md
 2. Screenshot :
-![]()
+![](preview.png)
 3. Deployment: 
-- 
+- https://github.com/rolling-scopes-school/irynadesigna-JSFEEN2022Q3/tree/unit-tests
 - https://github.com/IrynaDesigna/test-task.git
-4. Done: 00.02.2023 / Deadline: 06.02.2023
+4. Done: 05.02.2023 / Deadline: 06.02.2023
 
 ## Task
 Your task is to implement 'custom' version of the lodash library following next requirements:
